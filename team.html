@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <title>Soccer Watch — All in one place</title>
+  <meta name="description" content="Soccer Watch — All in one place"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#00897B" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+       <!-- Navigasi -->
+    <nav class="teal lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo" id="logo-container">SoccerWatch</a>
+        <a href="./index.html" class="sidenav-trigger" data-target="nav-mobile">
+          <i class="material-icons">arrow_back</i>
+        </a>
+        <ul class="topnav right hide-on-med-and-down"></ul>
+        <ul class="sidenav" id="nav-mobile">
+        </ul>
+      </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+    <div class="container">
+      <div class="row">
+        <div class="container">
+          <div class="right">
+            <a class="btn-floating btn-large waves-effect waves-light pink" id="btn-fav">
+              <i class="material-icons">favorite</i>
+            </a>
+          </div>
+        </div>
+        <div id="team-content">
+          <center>
+            <div class="preloader-wrapper big active" style="margin-top: 20vh">
+                <div class="spinner-layer spinner-blue">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+
+                <div class="spinner-layer spinner-red">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+
+                <div class="spinner-layer spinner-yellow">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+
+                <div class="spinner-layer spinner-green">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+          </center>
+        </div>
+      </div>
+    </div>
+    <script src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/idb.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
+    <script src="js/component.js"></script>
+    <script src="js/team-api.js"></script>
+    <script src="sw-regist.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var urlParams = new URLSearchParams(window.location.search);
+          var idParam = urlParams.get("id");
+
+          var urlParams = new URLSearchParams(window.location.search);
+          var isFromSaved = urlParams.get("saved");
+          var btnFav = document.getElementById("btn-fav");
+
+          if (isFromSaved) {
+            getTeam(idParam);
+            btnFav.style.display = 'none';
+          } else {
+            var item = getTeamById(idParam);
+            item.then(function(item) {
+              document.getElementById("team-content").innerHTML = teamCard(item);  
+            });
+            btnFav.onclick = function() {
+              item.then(function(item) {
+                addTeam(item);
+                document.location.search = `id=${item.id}&saved=1`;
+              });
+            };
+          }
+
+      });
+      function showNotifikasiSederhana() {
+        const title = 'Soccer Watch';
+        const options = {
+            'body': 'Anda akan mendapatkan notifikasi untuk tim ini.',
+            'badge': '/icon-192.png',
+            'tag': 'soccer-watch',
+            'renotify': true,
+            'icon': '/icon-192.png'
+        }
+        if (Notification.permission === 'granted') {
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification(title, options);
+            });
+        } else {
+            console.error('FItur notifikasi tidak diijinkan.');
+        }
+    }
+    </script>
+  </body>
+</html>

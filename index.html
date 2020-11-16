@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Soccer Watch — All in one place</title>
+  <meta name="description" content="Soccer Watch — All in one place"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#00897B"/>
+  
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigasi -->
+  <nav class="teal lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo" id="logo-container">SoccerWatch</a>
+      <a href="#" class="sidenav-trigger" data-target="nav-mobile">☰</a>
+      
+      <ul class="topnav right hide-on-med-and-down"></ul>
+      <ul class="sidenav" id="nav-mobile"></ul>
+    </div>
+  </nav>
+  <!-- Akhir Navigasi -->
+  <div class="container" id="body-content"></div>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="sw-regist.js"></script>
+  <script type="text/javascript" src="js/idb.js"></script>
+  <script type="text/javascript" src="js/database.js"></script>
+  <script src="js/fav-api.js"></script>
+  <script src="js/competitions-api.js"></script>
+  <script src="js/component.js"></script>
+  <script src="js/matches-api.js"></script>
+</body>
+</html>
