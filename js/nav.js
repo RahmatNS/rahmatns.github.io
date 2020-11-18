@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function loadNav() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4) {
+    if (this.readyState === 4) {
       if (this.status != 200) return;
  
       // Muat daftar tautan menu
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
     };
-    xhttp.open("GET", "pages/" + page + ".html", true);
+    xhttp.open("GET", `pages/${page}.html`, true);
     xhttp.send();
   }
 });

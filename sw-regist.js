@@ -46,8 +46,9 @@ function requestPermission() {
   });
 }
 
-if (('PushManager' in window)) {
-    navigator.serviceWorker.getRegistration().then(function(registration) {
+navigator.serviceWorker.ready.then(() => {
+    if (('PushManager' in window)) {
+      navigator.serviceWorker.getRegistration().then(function(registration) {
         registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array("BBR5SwJwG6AwWGeXIguR9Rqv0RDfGltwiur4sh_hIERIfHk4Uur3iatigiTP4rM4ZzfCgwp7Czw1ROT7d3HLIls")
@@ -60,5 +61,6 @@ if (('PushManager' in window)) {
         }).catch(function(e) {
             console.error('Tidak dapat melakukan subscribe ', e.message);
         });
-    });
-}
+      });
+    }
+});

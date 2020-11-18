@@ -30,7 +30,9 @@ var urlsToCache = [
   {url: "/js/component.js", revision: revision},
 ];
 
-workbox.precaching.precacheAndRoute(urlsToCache);
+workbox.precaching.precacheAndRoute(urlsToCache, {
+  ignoreUrlParametersMatching: [/.*/]
+});
 
 workbox.routing.registerRoute(
   /\.(?:png|gif|jpg|jpeg|svg)$/,
@@ -50,6 +52,13 @@ workbox.routing.registerRoute(
   new RegExp('/pages/'),
     workbox.strategies.staleWhileRevalidate({
         cacheName: 'pages'
+    })
+);
+
+workbox.routing.registerRoute(
+    /.*(?:googleapis|gstatic)\.com/,
+    workbox.strategies.staleWhileRevalidate({
+      cacheName: 'google-fonts-stylesheets',
     })
 );
 

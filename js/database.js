@@ -7,13 +7,6 @@ var dbPromise = idb.open("soccer-watch", 2, function(upgradeDb) {
   }
 });
 
-
-// function addCompetitions(competitions){
-// 	competitions.forEach((comp, index){
-// 		addCompetition(comp);
-// 	});
-// }
-
 var addCompetition = function(competition){
 	dbPromise.then(function(db) {
 		var tx = db.transaction('competitions', 'readwrite');
